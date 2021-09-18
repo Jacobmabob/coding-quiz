@@ -33,7 +33,10 @@ main {
     box-shadow: 6px 6px 0 black;
 }
 
-.card-header {
+#question-content {
+    font-size: 2em;
+    text-align: center;
+    margin: 10px;
     
 }
 
@@ -43,6 +46,16 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    align-self: flex-start;
+}
+
+.card-content ol {
+    font-size: 1.75rem;
+
+}
+
+.card-content ol li {
+    margin-top: 60px; 
 }
 
 .bttn { 
