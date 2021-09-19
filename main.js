@@ -5,6 +5,8 @@ var cardElement = document.querySelector('.card');
 var cardHeader = document.querySelector('.card-header');
 var cardContent = document.querySelector('.card-content')
 var questionContent = document.querySelector('#question-content');
+const originalState = cardElement.innerHTML
+var playerPoints = 0
 
 
 const questionOne = {
@@ -62,6 +64,18 @@ const questionFive = {
     correctAnswer: "if (i == 5)"
 }
 
+var questionArray = [
+    questionOne,
+    questionTwo,
+    questionThree,
+    questionFour,
+    questionFive
+    ]
+
+var currentQuestion = 0
+
+
+
 function startQuiz() {
     startTimer();
 
@@ -74,49 +88,68 @@ function startQuiz() {
     var li4= document.createElement("li");
     var listArray = [li1, li2, li3, li4];
 
+
     cardContent.appendChild(questionListEl)
     questionListEl.appendChild(li1)
     questionListEl.appendChild(li2)
     questionListEl.appendChild(li3)
     questionListEl.appendChild(li4)
 
-    function questionAnswerFill(currentQuestion) {
-        var currentQuestion = [
-                              questionOne,
-                              questionTwo,
-                              questionThree,
-                              questionFour,
-                              questionFive
-                              ]
+   
+    questionAnswerFill(currentQuestion);
+    
+    for (var i = 0; i < listArray.length; i++) {
+        listArray[i].addEventListener('click', function(event) {
+        
+        console.log(questionArray[currentQuestion].correctAnswer)
+        console.log(event.target.textContent)
+        checkAnswer();
+        nextQuestion();
+     })
+    }   
 
-        questionContent.textContent = currentQuestion[0].question;
-        for (let i = 0; i < listArray.length; i++)
-        console.log(questionContent);
+
+    function questionAnswerFill(currentQuestion) {  
+        questionContent.textContent = questionArray[currentQuestion].question;
+        li1.textContent = questionArray[currentQuestion].answers[0]
+        li2.textContent = questionArray[currentQuestion].answers[1]
+        li3.textContent = questionArray[currentQuestion].answers[2]
+        li4.textContent = questionArray[currentQuestion].answers[3]
     }
 
-    questionAnswerFill()
-
-
-
-    // questionContent.textContent = questionOne.question;
-
-    
-}
-
-
-
-var timer;
-var timerCount = 75;
-function startTimer() {
-    timer = setInterval(function() {
-        timerCount--;
-        timerElement.textContent = timerCount;
-
-        if (timerCount === 0) {
-            clearInterval(timer)
+    function nextQuestion() {
+        if (currentQuestion < 4) {
+            currentQuestion++;
+            questionAnswerFill(currentQuestion); 
+        } else {
+            cardElement.innerHTML = "";
         }
+    }
 
-    }, 1000)
-} 
+    function checkAnswer() {
+        if (event.target.textContent === questionArray[currentQuestion].correctAnswer) {
+        console.log(true)
+        playerPoints += 100;
+        console.log(playerPoints);
+        } else {
+            console.log(false);
+            console.log(playerPoints);
+            timerCount = timerCount - 10;
+        }
+    }
 
+    var timer;
+    var timerCount = 75;
+    function startTimer() {
+        timer = setInterval(function() {
+            timerCount--;
+            timerElement.textContent = timerCount;
+
+            if (timerCount === 0) {
+                clearInterval(timer)
+            }
+
+        }, 1000)
+    } 
+}
 startButton.addEventListener('click', startQuiz)
