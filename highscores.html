@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+    <title>Hall of Champions</title>
+</head>
+<body>
+    <header>
+        <div id=viewHighscores>
+            <a href="index.html">Play Again?</a>
+        </div>
+        <div id="timer">
+            <h2>Time: <span id="timer-count">0</span></h2>
+        </div>
+    </header>
+    <main>
+        <div class="card">
+            <div class="card-header">
+                <span id="question-content">The Hall of Champions!</span>
+            </div>
+                <table class="score-table">
+                    <thead>
+                        <tr>
+                            <th colspan="2">Highscores</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Name</td>
+                            <td>Score</td>
+                        </tr>
+                    </tbody>
+                </table> 
+    </main>
+    <script src="/highscores.js"></script>
+</body>
+</html>

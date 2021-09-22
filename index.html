@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Coding Challenge</title>
 </head>
 <body>
+    <audio id="theme-song" src="assets/audio/Gigakoops - I'll Rip Every Tooth Out of That Shark and Make Them Into the Most Beautiful Necklace You Ever Seen.mp3"></audio>
     <header>
         <div id=viewHighscores>
-            <a href="">View Highscores</a>
+            <a href="highscores.html">View Highscores</a>
         </div>
         <div id="timer">
             <h2>Time: <span id="timer-count">75</span></h2>
@@ -19,7 +23,8 @@
     <main>
         <div class="card">
             <div class="card-header">
-                <span id="question-content">JavaScript Fundamentals Quiz!</span>
+                <img src="assets/images/coding.png" alt="coding challenge logo" class="img">
+                <span id="question-content"></span>
             </div>
             <div class="card-content">
                 <p>Put your JavaScript skills to the test with this coding quiz! You'll be given 5 questions. Answer the questions within the alloted time to complete the quiz. Be careful! Time will be taken off of the clock for every incorrect answer! </p>

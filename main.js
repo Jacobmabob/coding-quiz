@@ -7,7 +7,8 @@ var cardContent = document.querySelector('.card-content')
 var questionContent = document.querySelector('#question-content');
 const originalState = cardElement.innerHTML
 var playerPoints = 0
-
+var titleImage = document.querySelector('.img');
+var themeSong = document.querySelector('#theme-song');
 
 const questionOne = {
     question: "Inside of which HTML element do we put the JavaScript?",
@@ -74,12 +75,15 @@ var questionArray = [
 
 var currentQuestion = 0
 
-
+var storageObjArray = []
 
 function startQuiz() {
     startTimer();
+    themeSong.play();
 
-    cardContent.textContent = "";
+
+    titleImage.remove();
+    cardContent.textContent= "";
     buttonDiv.innerHTML = "";
     var questionListEl = document.createElement("ol");
     var li1= document.createElement("li");
@@ -100,13 +104,19 @@ function startQuiz() {
     
     for (var i = 0; i < listArray.length; i++) {
         listArray[i].addEventListener('click', function(event) {
-        
-        console.log(questionArray[currentQuestion].correctAnswer)
-        console.log(event.target.textContent)
-        checkAnswer();
-        nextQuestion();
-     })
+            console.log(questionArray[currentQuestion].correctAnswer)
+            console.log(event.target.textContent)
+            checkAnswer();
+            setTimeout(function(){
+                nextQuestion();
+                revertColor();
+            }, 800)
+        })
     }   
+
+
+
+
 
 
     function questionAnswerFill(currentQuestion) {  
@@ -122,31 +132,90 @@ function startQuiz() {
             currentQuestion++;
             questionAnswerFill(currentQuestion); 
         } else {
-            cardElement.innerHTML = "";
+            logYourScore();
         }
     }
 
     function checkAnswer() {
         if (event.target.textContent === questionArray[currentQuestion].correctAnswer) {
-        console.log(true)
-        playerPoints += 100;
-        console.log(playerPoints);
+            console.log(true)
+            event.target.setAttribute('style', 'border-color: green;')
+            playerPoints += 100;
+            console.log(playerPoints);
         } else {
+            event.target.setAttribute('style', 'border-color: tomato;')
             console.log(false);
             console.log(playerPoints);
             timerCount = timerCount - 10;
         }
     }
 
+    function revertColor() {
+        for (var i =0; i < listArray.length; i++)
+            listArray[i].setAttribute('style', 'border-color: black;')
+    }
+
+    function logYourScore() {
+        cardElement.innerHTML = "";
+
+        var scoreHeading = document.createElement('h1');
+        cardElement.appendChild(scoreHeading);
+        scoreHeading.textContent = "Score: " + playerPoints;
+
+        var playerScoreFormEl = document.createElement('form');
+        cardElement.appendChild(playerScoreFormEl);
+        // playerScoreFormEl.setAttribute('action', '#');
+        playerScoreFormEl.setAttribute('method', 'post')
+
+        var playerNameLabel = document.createElement('label');
+        playerScoreFormEl.appendChild(playerNameLabel);
+        playerNameLabel.textContent = "Save Your Score: "
+        
+        var playerName = document.createElement('input');
+        playerScoreFormEl.appendChild(playerName)
+        playerName.setAttribute('type', 'text');
+        playerName.setAttribute('placeholder', 'Enter Your Name Here!')
+        console.log(playerName)
+
+       
+
+
+        var storageObjArray = []
+        console.log(playerName.value)
+
+        var submitButton = document.createElement('button');
+        playerScoreFormEl.appendChild(submitButton);
+        submitButton.textContent = "Submit"
+        submitButton.setAttribute('type', 'submit')
+        submitButton.setAttribute('style', 'display: block;')
+        submitButton.setAttribute('class', 'submit-bttn');
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            var localStorageScore = {
+                name: playerName.value,
+                score: playerPoints
+            }
+
+            storageObjArray.push(localStorageScore);
+            localStorage.setItem('player score', JSON.stringify(storageObjArray));
+            console.log(playerName.value)
+        }
+        submitButton.addEventListener('click', handleFormSubmit)
+        console.log(playerName.value)
+
+    }
+    
     var timer;
     var timerCount = 75;
     function startTimer() {
         timer = setInterval(function() {
             timerCount--;
             timerElement.textContent = timerCount;
-
+            
             if (timerCount === 0) {
-                clearInterval(timer)
+                clearInterval(timer);
+                logYourScore();
             }
 
         }, 1000)
