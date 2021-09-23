@@ -52,7 +52,7 @@ main {
 }               
 
 #question-content {
-    font-size: 2em;
+    font-size: 1.8em;
     text-align: center;
     margin: 10px;
     
@@ -117,7 +117,7 @@ li {
     padding: 5px;
     border-radius: 10px;
     margin: 20px 0px;
-    font-size: 3rem;
+    font-size: 2.6rem;
 }
 
 li:hover {

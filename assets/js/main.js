@@ -10,6 +10,8 @@ var playerPoints = 0
 var titleImage = document.querySelector('.img');
 var themeSong = document.querySelector('#theme-song');
 
+
+// question variables
 const questionOne = {
     question: "Inside of which HTML element do we put the JavaScript?",
     answers:[
@@ -74,9 +76,10 @@ var questionArray = [
     ]
 
 var currentQuestion = 0
-
 var storageObjArray = []
 
+
+// game functions start here
 function startQuiz() {
     startTimer();
     themeSong.play();
@@ -84,6 +87,7 @@ function startQuiz() {
     titleImage.remove();
     cardContent.textContent= "";
     buttonDiv.innerHTML = "";
+
     var questionListEl = document.createElement("ol");
     var li1= document.createElement("li");
     var li2= document.createElement("li");
@@ -91,14 +95,12 @@ function startQuiz() {
     var li4= document.createElement("li");
     var listArray = [li1, li2, li3, li4];
 
-
     cardContent.appendChild(questionListEl)
     questionListEl.appendChild(li1)
     questionListEl.appendChild(li2)
     questionListEl.appendChild(li3)
     questionListEl.appendChild(li4)
 
-   
     questionAnswerFill(currentQuestion);
     
     for (var i = 0; i < listArray.length; i++) {
@@ -112,11 +114,6 @@ function startQuiz() {
             }, 800)
         })
     }   
-
-
-
-
-
 
     function questionAnswerFill(currentQuestion) {  
         questionContent.textContent = questionArray[currentQuestion].question;
