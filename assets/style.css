@@ -58,7 +58,6 @@ main {
     
 }
 
-/* .card */
 
 .card-header {
     display: flex;
@@ -104,12 +103,6 @@ button:hover {
     font-size: 1.75rem;
     margin-top: 80px;
     text-align: start;
-}
-
-
-
-.bttn { 
-
 }
 
 li {
