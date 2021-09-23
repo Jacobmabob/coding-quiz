@@ -81,7 +81,6 @@ function startQuiz() {
     startTimer();
     themeSong.play();
 
-
     titleImage.remove();
     cardContent.textContent= "";
     buttonDiv.innerHTML = "";
@@ -180,7 +179,7 @@ function startQuiz() {
        
 
 
-        var storageObjArray = []
+        
         console.log(playerName.value)
 
         var submitButton = document.createElement('button');
@@ -191,18 +190,15 @@ function startQuiz() {
         submitButton.setAttribute('class', 'submit-bttn');
 
         function handleFormSubmit(event) {
-            event.preventDefault();
-            var localStorageScore = {
-                name: playerName.value,
-                score: playerPoints
-            }
-
-            storageObjArray.push(localStorageScore);
-            localStorage.setItem('player score', JSON.stringify(storageObjArray));
-            console.log(playerName.value)
+            event.preventDefault();    
+            playerNameData = playerName.value,
+            playerScore = playerPoints
+            
+            
+            localStorage.setItem('player name', JSON.stringify(playerNameData)); 
+            localStorage.setItem('player score', JSON.stringify(playerScore)); 
         }
         submitButton.addEventListener('click', handleFormSubmit)
-        console.log(playerName.value)
 
     }
     
